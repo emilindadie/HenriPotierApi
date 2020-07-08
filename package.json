@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Emilin DADIE",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
