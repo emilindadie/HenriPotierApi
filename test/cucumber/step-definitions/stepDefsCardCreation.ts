@@ -9,7 +9,7 @@ import { CardDto, ICard } from '../../../src/models/card';
 export class StepDefsCardCreation {
 
     @given(/^a Card of number (.*) and of expiration (.*) and of cryptogramme (.*)$/)
-    public a_card_of_number_09879486007358(number: number, expiration: number, cryptogramme: number) {
+    public aCardOfNumber09879486007358(number: number, expiration: number, cryptogramme: number) {
         const card: CardDto = new CardDto();
         card.number = number;
         card.expiration = new Date(expiration);
@@ -18,7 +18,7 @@ export class StepDefsCardCreation {
     }
 
     @when('user want to create a card')
-    public async user_want_to_create_a_card()  {
+    public async userWantToCreateACard()  {
         const service = axios.create({
             baseURL: 'http://localhost:3000',
         });
@@ -27,8 +27,8 @@ export class StepDefsCardCreation {
     }
 
     @then('the card is created')
-    public the_card_is_created() {
-        let response: AxiosResponse<ICard>;
+    public theCardIsCreated() {
+        let response: AxiosResponse<ICard> = null;
         response = threadLocals.get(typeof response);
         assert.equal(response.status, 201);
     }

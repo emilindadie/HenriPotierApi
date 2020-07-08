@@ -1,4 +1,4 @@
-Feature: Trot Catalog
+Feature: Card Catalog
   An user wants to add a Card into the catalogue
 
   @Catalog
