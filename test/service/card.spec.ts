@@ -3,7 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CardService } from '../../src/services/card.service';
 import { CardEntity } from '../../src/entities';
-import { cardDto, icard }  from '../../test-files';
+import { cardDtoMock, icardMock, getAllCardMock }  from '../../test-files';
 
 import { ICard } from '../../src/models';
 
@@ -31,14 +31,23 @@ describe('CardService', () => {
 
   it('should create a card', async () => {
     // Arrange
-    const intputcardDto = cardDto;
-    const createSpy = jest.spyOn(repository, 'save').mockResolvedValue(icard);
+    const intputcardDto = cardDtoMock;
+    const createSpy = jest.spyOn(repository, 'save').mockResolvedValue(icardMock);
 
     // Act
-    const ouput: ICard = await service.create(intputcardDto);
+    const output: ICard = await service.create(intputcardDto);
 
     // Assert
-    expect(ouput.id).toBeDefined();
+    expect(output.id).toBeDefined();
     expect(createSpy).toHaveBeenCalled();
+  });
+
+  it('should get all card', async () => {
+    const getAllSpy = jest.spyOn(repository, 'find').mockResolvedValue(getAllCardMock);
+
+    const output: ICard[] = await service.getAll();
+
+    expect(output).toBeInstanceOf(Array);
+    expect(getAllSpy).toHaveBeenCalled();
   });
 });

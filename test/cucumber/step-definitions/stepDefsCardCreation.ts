@@ -12,7 +12,7 @@ export class StepDefsCardCreation {
     public aCardOfNumber09879486007358(number: string, expiration: string, cryptogramme: string) {
         const card: CardDto = new CardDto();
         card.number = Number(number);
-        card.expiration = new Date(Number(expiration));
+        card.expiration = Number(expiration);
         card.cryptogramme = Number(cryptogramme);
         threadLocals.set(CardDto, card);
     }

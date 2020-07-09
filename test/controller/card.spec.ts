@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { CardEntity } from '../../src/entities';
 import { CardService } from '../../src/services/card.service';
 import { CardController } from '../../src/controllers/card.controller';
-import { cardDto, icard } from '../../test-files';
+import { cardDtoMock, icardMock, getAllCardMock } from '../../test-files';
 import { ICard } from '../../src/models';
 
 describe('CardController', () => {
@@ -32,14 +32,24 @@ describe('CardController', () => {
 
   it('should create a card', async () => {
     // Arrange
-    const intputCardDto = cardDto;
-    const createSpy = jest.spyOn(service, 'create').mockResolvedValue(icard);
+    const intputCardDto = cardDtoMock;
+    const createSpy = jest.spyOn(service, 'create').mockResolvedValue(icardMock);
 
     // Act
-    const ouput: ICard = await controller.create(intputCardDto);
+    const output: ICard = await controller.create(intputCardDto);
 
     // Assert
-    expect(ouput.id).toBeDefined();
+    expect(output.id).toBeDefined();
     expect(createSpy).toHaveBeenCalled();
+  });
+
+
+  it('should get all card', async () => {
+    const getAllSpy = jest.spyOn(service, 'getAll').mockResolvedValue(getAllCardMock);
+
+    const output: ICard[] = await controller.getAll();
+
+    expect(output).toBeInstanceOf(Array);
+    expect(getAllSpy).toHaveBeenCalled();
   });
 });

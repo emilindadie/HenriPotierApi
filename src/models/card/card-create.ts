@@ -1,15 +1,19 @@
-import {IsDate, IsNumber, ValidateIf, IsNotEmpty} from "class-validator";
+import {IsDate, IsNumber, IsNotEmpty, Validate} from "class-validator";
+import { CustomTextLengthValidation } from "../../../src/validations/card-length.validation";
+import { Type } from 'class-transformer';
+import "reflect-metadata";
 
 export class CardDto {
     @IsNumber()
     @IsNotEmpty()
-    @ValidateIf(o => o.length === 9)
+    @Validate(CustomTextLengthValidation, [9]) 
     number: number;
     @IsNotEmpty()
     @IsDate()
-    expiration: Date;
+    @Type(() => Date)
+    expiration: number;
     @IsNotEmpty()
     @IsNumber()
-    @ValidateIf(o => o.length === 3)
+    @Validate(CustomTextLengthValidation, [3])
     cryptogramme: number;
 }

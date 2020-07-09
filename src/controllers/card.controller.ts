@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, Body } from '@nestjs/common';
+import { Controller, Post, HttpCode, Body, Get } from '@nestjs/common';
 import { CardDto } from '../models';
 import { CardService } from '../services/card.service';
 
@@ -11,5 +11,11 @@ export class CardController {
     @HttpCode(201)
     create(@Body() cardDto: CardDto) {
         return this.service.create(cardDto);
+    }
+
+    @Get()
+    @HttpCode(200)
+    getAll() {
+        return this.service.getAll();
     }
 }
