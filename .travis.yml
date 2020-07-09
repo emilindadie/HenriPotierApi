@@ -6,3 +6,7 @@ cache:
   - node_modules
 script:
   - npm test
+services:
+  - mysql
+before_install:
+- mysql -u root --password="" < config/travis.sql
