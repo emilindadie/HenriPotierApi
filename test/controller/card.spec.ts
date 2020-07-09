@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CardEntity } from 'src/entities';
-import { CardService } from 'src/services/card.service';
-import { CardController } from 'src/controllers/card.controller';
-import { cardDto, icard } from 'test-files';
-import { ICard } from 'src/models';
+import { CardEntity } from '../../src/entities';
+import { CardService } from '../../src/services/card.service';
+import { CardController } from '../../src/controllers/card.controller';
+import { cardDto, icard } from '../../test-files';
+import { ICard } from '../../src/models';
 
 describe('CardController', () => {
   let module: TestingModule;

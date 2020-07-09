@@ -1,6 +1,6 @@
 import { Controller, Post, HttpCode, Body } from '@nestjs/common';
-import { CardDto } from 'src/models';
-import { CardService } from 'src/services/card.service';
+import { CardDto } from '../models';
+import { CardService } from '../services/card.service';
 
 @Controller('/henripotier/api/cards')
 export class CardController {
@@ -10,7 +10,6 @@ export class CardController {
     @Post()
     @HttpCode(201)
     create(@Body() cardDto: CardDto) {
-        console.log(cardDto);
         return this.service.create(cardDto);
     }
 }

@@ -11,3 +11,12 @@ Feature: Card Catalog
       | number           | expiration     | cryptogramme  |
       | 098794867        | 1590962400000  | 899           |
 
+  Scenario Outline: Get all Card by an user
+    Given a Card of number <number> and of expiration <expiration> and of cryptogramme <cryptogramme>
+    When user want to get all card
+    Then all card is get
+
+    Examples:
+      | number           | expiration     | cryptogramme  |
+      | 098794867        | 1590962400000  | 899           |
+

@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CardService } from 'src/services/card.service';
-import { CardEntity } from 'src/entities';
+import { CardService } from '../../src/services/card.service';
+import { CardEntity } from '../../src/entities';
 import { cardDto, icard }  from '../../test-files';
 
-import { ICard } from 'src/models';
+import { ICard } from '../../src/models';
 
 describe('CardService', () => {
   let module: TestingModule;
@@ -29,7 +29,7 @@ describe('CardService', () => {
       expect(service).toBeDefined();
   });
 
-  it('should create a trot', async () => {
+  it('should create a card', async () => {
     // Arrange
     const intputcardDto = cardDto;
     const createSpy = jest.spyOn(repository, 'save').mockResolvedValue(icard);

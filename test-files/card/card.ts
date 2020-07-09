@@ -1,4 +1,4 @@
-import { CardDto, ICard } from 'src/models';
+import { CardDto, ICard } from '../../src/models';
 
 export const cardDto = new CardDto();
 cardDto.number = 2222;
