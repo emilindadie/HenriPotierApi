@@ -37,7 +37,7 @@ export class SecureCardController {
     @HttpCode(200)
     async getOne(@Body() oneCardDto: OneCardDto) {
         try {
-            const oneCard=  await this.service.getOne(oneCardDto.cardNumber, new Date(oneCardDto.expiration), oneCardDto.cryptogramme);
+            const oneCard = await this.service.getOne(oneCardDto.cardNumber, new Date(oneCardDto.expiration), oneCardDto.cryptogramme);
             const getOneCardResponse =  await this.secureService.createToken(oneCard);
             const apiResponse: ApiResponse<ICard> = new ApiResponse();
             apiResponse.data = getOneCardResponse.data;

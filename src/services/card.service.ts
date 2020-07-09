@@ -41,7 +41,11 @@ export class CardService {
 
 
     async getOne(cardNumber: number, expiration: Date, cryptogramme: number): Promise<ICard> {
-        return await this.cardRepository.findOne({cardNumber, cryptogramme, expiration});
+        const card = await this.cardRepository.findOne({cardNumber, cryptogramme, expiration});
+        if (!card) {
+            throw new Error('Maybe any information are eroned!');
+        }
+        return card;
     }
 
     async getOneById(id: number): Promise<ICard> {
