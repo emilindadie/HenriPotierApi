@@ -4,5 +4,8 @@ import "reflect-metadata";
 export class CardTransactionDto {
     @IsNumber()
     @IsNotEmpty()
+    id: number;
+    @IsNumber()
+    @IsNotEmpty()
     amount: number;
 }

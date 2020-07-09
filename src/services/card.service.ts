@@ -22,7 +22,11 @@ export class CardService {
         return await this.cardRepository.findOne({ cardNumber });
     }
 
-     async create(cardDto: CardDto): Promise<ICard> {
+    async getCardById(id: number): Promise<CardEntity> {
+        return await this.cardRepository.findOne({id});
+    }
+
+    async create(cardDto: CardDto): Promise<ICard> {
         const cardExist = await this.checkIfCardExist(cardDto.cardNumber);
         if (cardExist) {
             throw new Error('card already exist!');
@@ -39,7 +43,6 @@ export class CardService {
        return await this.cardRepository.find();
     }
 
-
     async getOne(cardNumber: number, expiration: Date, cryptogramme: number): Promise<ICard> {
         const card = await this.cardRepository.findOne({cardNumber, cryptogramme, expiration});
         if (!card) {
@@ -48,7 +51,12 @@ export class CardService {
         return card;
     }
 
-    async getOneById(id: number): Promise<ICard> {
-        return await this.cardRepository.findOne({id});
+    async doTransaction(id: number, amount : number): Promise<ICard>{
+        const card = await this.getCardById(id);
+        card.solde += amount;
+        if(card.solde < 0){
+            throw new Error('Insuficient balance!');  
+        }
+        return this.cardRepository.save(card);
     }
 }

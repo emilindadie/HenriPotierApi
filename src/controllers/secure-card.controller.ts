@@ -1,8 +1,10 @@
-import { Controller, Post, HttpCode, Body, Get } from '@nestjs/common';
+import { Controller, Post, HttpCode, Body, Get, UseGuards } from '@nestjs/common';
 import { CardDto, ICard, OneCardDto } from '../models';
 import { CardService } from '../services/card.service';
 import { ApiResponse } from '../models/api-response/api-response.model';
 import { SecureCardService } from '../../src/services/secure-card.service';
+import { CardTransactionDto } from '../../src/models/card/card-transaction.model';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/henripotier/api/cards')
 export class SecureCardController {
@@ -42,6 +44,22 @@ export class SecureCardController {
             const apiResponse: ApiResponse<ICard> = new ApiResponse();
             apiResponse.data = getOneCardResponse.data;
             apiResponse.accessToken = getOneCardResponse.accessToken;
+            return apiResponse;
+        } catch (e) {
+            const apiResponse: ApiResponse<ICard> = new ApiResponse();
+            apiResponse.error = { message : e.message };
+            return apiResponse;
+        }
+    }
+
+    @Post('transaction')
+    @HttpCode(200)
+    @UseGuards(AuthGuard())
+    async doTransaction(@Body() cardTransactionDto: CardTransactionDto) {
+        try {
+            const createTransactionResponse = await this.service.doTransaction(cardTransactionDto.id, cardTransactionDto.amount);
+            const apiResponse: ApiResponse<ICard> = new ApiResponse();
+            apiResponse.data = createTransactionResponse;
             return apiResponse;
         } catch (e) {
             const apiResponse: ApiResponse<ICard> = new ApiResponse();

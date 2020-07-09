@@ -1,9 +1,15 @@
 import { CardDto, ICard, OneCardDto } from '../../src/models';
+import { CardTransactionDto } from '../../src/models/card/card-transaction.model';
 
 export const cardDtoMock = new CardDto();
 cardDtoMock.cardNumber = 678908776;
 cardDtoMock.expiration = 1590962400000;
-cardDtoMock.cryptogramme = 679
+cardDtoMock.cryptogramme = 679;
+
+
+export const cardTransactionDtoMock = new CardTransactionDto();
+cardTransactionDtoMock.id = 1;
+cardTransactionDtoMock.amount = 600;
 
 export const icardMock: ICard = {
     id: 1,

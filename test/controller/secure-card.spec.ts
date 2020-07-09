@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CardEntity } from '../../src/entities';
 import { CardService } from '../../src/services/card.service';
-import { cardDtoMock, icardMock, getAllCardMock, oneCardDtoMock } from '../../test-files';
+import { cardDtoMock, icardMock, getAllCardMock, oneCardDtoMock, cardTransactionDtoMock } from '../../test-files';
 import { ICard } from '../../src/models';
 import { ApiResponse } from '../../src/models/api-response/api-response.model';
 import { SecureCardController } from '../../src/controllers/secure-card.controller';
@@ -36,11 +36,11 @@ describe('SecureCardController', () => {
 
   it('should create a card', async () => {
     // Arrange
-    const intputCardDto = cardDtoMock;
+    const inputCardDto = cardDtoMock;
     const createSpy = jest.spyOn(service, 'create').mockResolvedValue(icardMock);
 
     // Act
-    const output: ApiResponse<ICard> = await controller.create(intputCardDto);
+    const output: ApiResponse<ICard> = await controller.create(inputCardDto);
 
     // Assert
     expect(output.data.id).toBeDefined();
@@ -59,7 +59,7 @@ describe('SecureCardController', () => {
 
 
   it('should get one card', async () => {
-    const intputOneCardDto = oneCardDtoMock;
+    const inputOneCardDto = oneCardDtoMock;
     const getOneSpy = jest.spyOn(service, 'getOne').mockResolvedValue(icardMock);
 
     const getOneSpyToken = jest.spyOn(secureService, 'createToken').mockResolvedValue({
@@ -67,10 +67,21 @@ describe('SecureCardController', () => {
       data: icardMock
     });
 
-    const output: ApiResponse<ICard> = await controller.getOne(intputOneCardDto);
+    const output: ApiResponse<ICard> = await controller.getOne(inputOneCardDto);
 
     expect(output.data.id).toBeDefined();
     expect(getOneSpy).toHaveBeenCalled();
     expect(getOneSpyToken).toHaveBeenCalled();
+  });
+
+  it('should do a transaction', async () => {
+    const inputcardTransactionDto = cardTransactionDtoMock;
+
+    const createTransactionSpy = jest.spyOn(service, 'doTransaction').mockResolvedValue(icardMock);
+
+    const output: ApiResponse<ICard> = await controller.doTransaction(inputcardTransactionDto);
+
+    expect(output.data.id).toBeDefined();
+    expect(createTransactionSpy).toHaveBeenCalled();
   });
 });

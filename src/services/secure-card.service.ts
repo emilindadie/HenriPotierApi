@@ -8,7 +8,7 @@ export class SecureCardService {
   constructor(private cardService: CardService) {}
 
   async validateCard(id: number): Promise<ICard> {
-    return await this.cardService.getOneById(id);
+    return await this.cardService.getCardById(id);
   }
 
   async createToken(data : any){
