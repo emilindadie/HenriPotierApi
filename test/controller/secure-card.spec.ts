@@ -5,17 +5,19 @@ import { CardEntity } from '../../src/entities';
 import { CardService } from '../../src/services/card.service';
 import { cardDtoMock, icardMock, getAllCardMock, oneCardDtoMock } from '../../test-files';
 import { ICard } from '../../src/models';
-import { ApiResponse } from 'src/models/api-response/api-response.model';
-import { SecureCardController } from 'src/controllers/secure-card.controller';
+import { ApiResponse } from '../../src/models/api-response/api-response.model';
+import { SecureCardController } from '../../src/controllers/secure-card.controller';
+import { SecureCardService } from '../../src/services/secure-card.service';
 
 describe('SecureCardController', () => {
   let module: TestingModule;
   let controller: SecureCardController;
   let service: CardService;
+  let secureService: SecureCardService;
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      providers: [CardService,
+      providers: [CardService, SecureCardService,
           {
               provide: getRepositoryToken(CardEntity),
               useClass: Repository,
@@ -25,6 +27,7 @@ describe('SecureCardController', () => {
     }).compile();
     controller = module.get<SecureCardController>(SecureCardController);
     service = module.get<CardService>(CardService);
+    secureService = module.get<SecureCardService>(SecureCardService);
   });
 
   it('should be defined', () => {
@@ -57,11 +60,17 @@ describe('SecureCardController', () => {
 
   it('should get one card', async () => {
     const intputOneCardDto = oneCardDtoMock;
-    const getAllSpy = jest.spyOn(service, 'getOne').mockResolvedValue(icardMock);
+    const getOneSpy = jest.spyOn(service, 'getOne').mockResolvedValue(icardMock);
+
+    const getOneSpyToken = jest.spyOn(secureService, 'createToken').mockResolvedValue({
+      accessToken: '',
+      data: icardMock
+    });
 
     const output: ApiResponse<ICard> = await controller.getOne(intputOneCardDto);
 
     expect(output.data.id).toBeDefined();
-    expect(getAllSpy).toHaveBeenCalled();
+    expect(getOneSpy).toHaveBeenCalled();
+    expect(getOneSpyToken).toHaveBeenCalled();
   });
 });

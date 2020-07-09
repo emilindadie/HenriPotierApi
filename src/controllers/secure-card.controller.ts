@@ -2,7 +2,7 @@ import { Controller, Post, HttpCode, Body, Get } from '@nestjs/common';
 import { CardDto, ICard, OneCardDto } from '../models';
 import { CardService } from '../services/card.service';
 import { ApiResponse } from '../models/api-response/api-response.model';
-import { SecureCardService } from 'src/services/secure-card.service';
+import { SecureCardService } from '../../src/services/secure-card.service';
 
 @Controller('/henripotier/api/cards')
 export class SecureCardController {
