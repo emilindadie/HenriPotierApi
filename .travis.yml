@@ -10,3 +10,9 @@ services:
   - mysql
 before_install:
 - mysql -u root --password="" < config/travis.sql
+env:
+  - HOST=127.0.0.1
+  - DB_PORT=3306
+  - USERNAME=root
+  - PASSWORD=
+  - DATABASE=henripotier
