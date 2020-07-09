@@ -5,9 +5,11 @@ export class CardEntity{
     @PrimaryGeneratedColumn()
     id: number;
     @Column()
-    number: number;
+    cardNumber: number;
     @Column()
     expiration: Date;
     @Column()
     cryptogramme: number;
+    @Column()
+    solde: number;
 }

@@ -10,11 +10,28 @@ export class CardService {
             @InjectRepository(CardEntity) private readonly cardRepository: Repository<CardEntity>) {
             }
 
+    async checkIfCardExist(cardNumber: number): Promise<boolean> {
+        const users = await this.getcardByCardNumber(cardNumber);
+        if (users) {
+            return true;
+        }
+        return false;
+    }
+
+    async getcardByCardNumber(cardNumber: number): Promise<any> {
+        return await this.cardRepository.findOne({ cardNumber });
+    }
+
      async create(cardDto: CardDto): Promise<ICard> {
+        const cardExist = await this.checkIfCardExist(cardDto.cardNumber);
+        if (cardExist) {
+            throw new Error('card already exist!');
+        }
          const card = new CardEntity();
-         card.number = cardDto.number;
+         card.cardNumber = cardDto.cardNumber;
          card.expiration = new Date(cardDto.expiration);
          card.cryptogramme = cardDto.cryptogramme;
+         card.solde = cardDto.solde;
         return await this.cardRepository.save(card);
      }
 

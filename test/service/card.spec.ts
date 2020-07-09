@@ -32,6 +32,8 @@ describe('CardService', () => {
   it('should create a card', async () => {
     // Arrange
     const intputcardDto = cardDtoMock;
+    const findOneSpy = jest.spyOn(repository, 'findOne').mockResolvedValue(null);
+
     const createSpy = jest.spyOn(repository, 'save').mockResolvedValue(icardMock);
 
     // Act
@@ -39,6 +41,7 @@ describe('CardService', () => {
 
     // Assert
     expect(output.id).toBeDefined();
+    expect(findOneSpy).toHaveBeenCalled();
     expect(createSpy).toHaveBeenCalled();
   });
 

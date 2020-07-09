@@ -8,12 +8,13 @@ import { CardDto, ICard } from '../../../src/models/card';
 @binding()
 export class StepDefsCardCreation {
 
-    @given(/^a Card of number (.*) and of expiration (.*) and of cryptogramme (.*)$/)
-    public aCardOfNumber09879486007358(number: string, expiration: string, cryptogramme: string) {
+    @given(/^a Card of number (.*) and of expiration (.*) and of cryptogramme (.*) and of solde (.*)$/)
+    public aCardOfNumber09879486007358(cardNumber: string, expiration: string, cryptogramme: string, solde: string) {
         const card: CardDto = new CardDto();
-        card.number = Number(number);
+        card.cardNumber = Number(cardNumber);
         card.expiration = Number(expiration);
         card.cryptogramme = Number(cryptogramme);
+        card.solde = Number(solde);
         threadLocals.set(CardDto, card);
     }
 

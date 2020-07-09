@@ -6,6 +6,7 @@ import { CardService } from '../../src/services/card.service';
 import { CardController } from '../../src/controllers/card.controller';
 import { cardDtoMock, icardMock, getAllCardMock } from '../../test-files';
 import { ICard } from '../../src/models';
+import { ApiResponse } from 'src/models/api-response/api-response';
 
 describe('CardController', () => {
   let module: TestingModule;
@@ -36,10 +37,10 @@ describe('CardController', () => {
     const createSpy = jest.spyOn(service, 'create').mockResolvedValue(icardMock);
 
     // Act
-    const output: ICard = await controller.create(intputCardDto);
+    const output: ApiResponse<ICard> = await controller.create(intputCardDto);
 
     // Assert
-    expect(output.id).toBeDefined();
+    expect(output.data.id).toBeDefined();
     expect(createSpy).toHaveBeenCalled();
   });
 
@@ -47,9 +48,9 @@ describe('CardController', () => {
   it('should get all card', async () => {
     const getAllSpy = jest.spyOn(service, 'getAll').mockResolvedValue(getAllCardMock);
 
-    const output: ICard[] = await controller.getAll();
+    const output: ApiResponse<ICard[]> = await controller.getAll();
 
-    expect(output).toBeInstanceOf(Array);
+    expect(output.data).toBeInstanceOf(Array);
     expect(getAllSpy).toHaveBeenCalled();
   });
 });

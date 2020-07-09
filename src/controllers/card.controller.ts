@@ -1,6 +1,7 @@
 import { Controller, Post, HttpCode, Body, Get } from '@nestjs/common';
-import { CardDto } from '../models';
+import { CardDto, ICard } from '../models';
 import { CardService } from '../services/card.service';
+import { ApiResponse } from 'src/models/api-response/api-response';
 
 @Controller('/henripotier/api/cards')
 export class CardController {
@@ -9,13 +10,19 @@ export class CardController {
 
     @Post()
     @HttpCode(201)
-    create(@Body() cardDto: CardDto) {
-        return this.service.create(cardDto);
+    async create(@Body() cardDto: CardDto) : Promise<ApiResponse<ICard>> {
+        try {
+            const createCardResponse = await this.service.create(cardDto);
+            return { data : createCardResponse, error: null};
+        } catch (e) {
+            return { data: null, error: { message : e.message }};
+        }
     }
 
     @Get()
     @HttpCode(200)
-    getAll() {
-        return this.service.getAll();
+    async getAll() {
+        const getAllCardResponse =  await this.service.getAll();
+        return { data : getAllCardResponse , error: null};
     }
 }
