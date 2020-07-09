@@ -3,7 +3,8 @@ import { AxiosResponse } from 'axios';
 import axios from 'axios';
 import { assert } from 'chai';
 import { threadLocals } from './context';
-import { CardDto, ICard } from '../../../src/models/card';
+import { ICard } from '../../../src/models/card';
+import { ApiResponse } from 'src/models/api-response/api-response.model';
 
 @binding()
 export class StepDefsCardGetAll {
@@ -13,7 +14,7 @@ export class StepDefsCardGetAll {
         const service = axios.create({
             baseURL: 'http://localhost:3000',
         });
-        const response: AxiosResponse<ICard[]> = await service.get<ICard[]>('henripotier/api/cards', threadLocals.get(CardDto));
+        const response: AxiosResponse<ApiResponse<ICard[]>> = await service.get<ApiResponse<ICard[]>>('henripotier/api/cards');
         threadLocals.set(typeof response, response);
     }
 

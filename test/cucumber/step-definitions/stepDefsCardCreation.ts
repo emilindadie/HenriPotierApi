@@ -4,11 +4,12 @@ import axios from 'axios';
 import { assert } from 'chai';
 import { threadLocals } from './context';
 import { CardDto, ICard } from '../../../src/models/card';
+import { ApiResponse } from 'src/models/api-response/api-response.model';
 
 @binding()
 export class StepDefsCardCreation {
 
-    @given(/^a Card of number (.*) and of expiration (.*) and of cryptogramme (.*) and of solde (.*)$/)
+    @given(/^a Card of cardNumber (.*) and of expiration (.*) and of cryptogramme (.*) and of solde (.*)$/)
     public aCardOfNumber09879486007358(cardNumber: string, expiration: string, cryptogramme: string, solde: string) {
         const card: CardDto = new CardDto();
         card.cardNumber = Number(cardNumber);
@@ -23,7 +24,7 @@ export class StepDefsCardCreation {
         const service = axios.create({
             baseURL: 'http://localhost:3000',
         });
-        const response: AxiosResponse<ICard> = await service.post<ICard>('henripotier/api/cards', threadLocals.get(CardDto));
+        const response: AxiosResponse<ApiResponse<ICard>> = await service.post<ApiResponse<ICard>>('henripotier/api/cards', threadLocals.get(CardDto));
         threadLocals.set(typeof response, response);
     }
 

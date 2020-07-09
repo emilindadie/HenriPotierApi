@@ -1,9 +1,9 @@
 import {IsDate, IsNumber, IsNotEmpty, Validate} from "class-validator";
-import { CustomTextLengthValidation } from "../../../src/validations/card-length.validation";
+import { CustomTextLengthValidation } from "../../validations/card-length.validation";
 import { Type } from 'class-transformer';
 import "reflect-metadata";
 
-export class CardDto {
+export class OneCardDto {
     @IsNumber()
     @IsNotEmpty()
     @Validate(CustomTextLengthValidation, [9]) 
@@ -16,7 +16,4 @@ export class CardDto {
     @IsNumber()
     @Validate(CustomTextLengthValidation, [3])
     cryptogramme: number;
-    @IsNotEmpty()
-    @IsNumber()
-    solde: number;
 }

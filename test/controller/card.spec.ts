@@ -6,7 +6,7 @@ import { CardService } from '../../src/services/card.service';
 import { CardController } from '../../src/controllers/card.controller';
 import { cardDtoMock, icardMock, getAllCardMock } from '../../test-files';
 import { ICard } from '../../src/models';
-import { ApiResponse } from 'src/models/api-response/api-response';
+import { ApiResponse } from 'src/models/api-response/api-response.model';
 
 describe('CardController', () => {
   let module: TestingModule;

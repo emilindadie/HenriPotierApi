@@ -11,14 +11,14 @@ export class CardService {
             }
 
     async checkIfCardExist(cardNumber: number): Promise<boolean> {
-        const users = await this.getcardByCardNumber(cardNumber);
+        const users = await this.getCardByCardNumber(cardNumber);
         if (users) {
             return true;
         }
         return false;
     }
 
-    async getcardByCardNumber(cardNumber: number): Promise<any> {
+    async getCardByCardNumber(cardNumber: number): Promise<any> {
         return await this.cardRepository.findOne({ cardNumber });
     }
 
