@@ -9,5 +9,5 @@ Feature: Card Catalog
 
     Examples:
       | number           | expiration     | cryptogramme  |
-      | 09879486007358   | 1590962400000  | 899           |
+      | 098794867        | 1590962400000  | 899           |
 

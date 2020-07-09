@@ -3,7 +3,7 @@ import {IsDate, IsNumber, ValidateIf, IsNotEmpty} from "class-validator";
 export class CardDto {
     @IsNumber()
     @IsNotEmpty()
-    @ValidateIf(o => o.length === 14)
+    @ValidateIf(o => o.length === 9)
     number: number;
     @IsNotEmpty()
     @IsDate()
