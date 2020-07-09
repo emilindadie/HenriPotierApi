@@ -1,4 +1,4 @@
-import { CardDto, ICard } from '../../src/models';
+import { CardDto, ICard, OneCardDto } from '../../src/models';
 
 export const cardDtoMock = new CardDto();
 cardDtoMock.cardNumber = 678908776;
@@ -12,6 +12,12 @@ export const icardMock: ICard = {
     cryptogramme: 5500,
     solde: 7000
 };
+
+
+export const oneCardDtoMock = new OneCardDto();
+oneCardDtoMock.cardNumber = 567898765;
+oneCardDtoMock.cryptogramme = 567;
+oneCardDtoMock.expiration = 1590962400000;
 
 export const getAllCardMock: ICard[] = [{
     id: 1,

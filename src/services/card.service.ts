@@ -38,4 +38,13 @@ export class CardService {
      async getAll(): Promise<ICard[]> {
        return await this.cardRepository.find();
     }
+
+
+    async getOne(cardNumber: number, expiration: Date, cryptogramme: number): Promise<ICard> {
+        return await this.cardRepository.findOne({cardNumber, cryptogramme, expiration});
+    }
+
+    async getOneById(id: number): Promise<ICard> {
+        return await this.cardRepository.findOne({id});
+    }
 }

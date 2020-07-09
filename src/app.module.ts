@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { CardEntity } from './entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
-import { CardModule } from './modules/card/card.module';
+import { SecureCardModule } from './modules/securecard/secure-card.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { CardModule } from './modules/card/card.module';
       entities: [CardEntity],
       synchronize: true,
     }),
-    CardModule,
+    SecureCardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
