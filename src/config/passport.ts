@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, } from '@nestjs/common';
+import { Injectable, UnauthorizedException, HttpException, } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import 'dotenv/config';
@@ -17,8 +17,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     async validate(payload: any) {
        const card = await this.secureCardService.validateCard(payload.id);
        const dateNow = new Date();
-        if (!card || card.expiration.getTime() > dateNow.getTime()){
+        if (!card){
             throw new UnauthorizedException();
+        }
+        if (card.expiration.getTime() < dateNow.getTime()){
+            throw new HttpException('Card has expired', 400);
         }
         return card;
     }
