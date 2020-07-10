@@ -4,7 +4,7 @@ import axios from 'axios';
 import { assert } from 'chai';
 import { threadLocals } from './context';
 import { CardDto, ICard } from '../../../src/models/card';
-import { ApiResponse } from 'src/models/api-response/api-response.model';
+import { MyApiResponse } from 'src/models/api-response/api-response.model';
 
 @binding()
 export class StepDefsCardCreation {
@@ -24,7 +24,7 @@ export class StepDefsCardCreation {
         const service = axios.create({
             baseURL: 'http://localhost:3000',
         });
-        const response: AxiosResponse<ApiResponse<ICard>> = await service.post<ApiResponse<ICard>>('henripotier/api/cards', threadLocals.get(CardDto));
+        const response: AxiosResponse<MyApiResponse<ICard>> = await service.post<MyApiResponse<ICard>>('henripotier/api/cards', threadLocals.get(CardDto));
         threadLocals.set(typeof response, response);
     }
 

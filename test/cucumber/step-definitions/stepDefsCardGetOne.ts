@@ -5,7 +5,7 @@ import { assert } from 'chai';
 import { threadLocals } from './context';
 import { ICard, ISecureCard } from '../../../src/models/card';
 import { OneCardDto } from '../../../src/models/card/card-get-one.model';
-import { ApiResponse } from '../../../src/models/api-response/api-response.model';
+import { MyApiResponse } from '../../../src/models/api-response/api-response.model';
 
 @binding()
 export class StepDefsCardGetOne {
@@ -21,13 +21,13 @@ export class StepDefsCardGetOne {
         dto.cryptogramme = Number(cryptogramme);
         dto.expiration = Number(expiration);
 
-        const response: AxiosResponse<ApiResponse<ICard[]>> = await service.post<ApiResponse<ICard[]>>('henripotier/api/cards/secure', dto);
+        const response: AxiosResponse<MyApiResponse<ICard[]>> = await service.post<MyApiResponse<ICard[]>>('henripotier/api/cards/secure', dto);
         threadLocals.set(typeof response, response);
     }
 
     @then('user get his card')
     public allCardIsGet() {
-        let response: AxiosResponse<ApiResponse<ISecureCard>> = null;
+        let response: AxiosResponse<MyApiResponse<ISecureCard>> = null;
         response = threadLocals.get(typeof response);
         assert.equal(response.status, 200);
     }

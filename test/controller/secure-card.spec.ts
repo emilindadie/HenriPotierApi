@@ -5,7 +5,7 @@ import { CardEntity } from '../../src/entities';
 import { CardService } from '../../src/services/card.service';
 import { cardDtoMock, icardMock, getAllCardMock, oneCardDtoMock, cardTransactionDtoMock } from '../../test-files';
 import { ICard } from '../../src/models';
-import { ApiResponse } from '../../src/models/api-response/api-response.model';
+import { MyApiResponse } from '../../src/models/api-response/api-response.model';
 import { SecureCardController } from '../../src/controllers/secure-card.controller';
 import { SecureCardService } from '../../src/services/secure-card.service';
 
@@ -40,7 +40,7 @@ describe('SecureCardController', () => {
     const createSpy = jest.spyOn(service, 'create').mockResolvedValue(icardMock);
 
     // Act
-    const output: ApiResponse<ICard> = await controller.create(inputCardDto);
+    const output: MyApiResponse<ICard> = await controller.create(inputCardDto);
 
     // Assert
     expect(output.data.id).toBeDefined();
@@ -51,7 +51,7 @@ describe('SecureCardController', () => {
   it('should get all card', async () => {
     const getAllSpy = jest.spyOn(service, 'getAll').mockResolvedValue(getAllCardMock);
 
-    const output: ApiResponse<ICard[]> = await controller.getAll();
+    const output: MyApiResponse<ICard[]> = await controller.getAll();
 
     expect(output.data).toBeInstanceOf(Array);
     expect(getAllSpy).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('SecureCardController', () => {
       data: icardMock
     });
 
-    const output: ApiResponse<ICard> = await controller.getOne(inputOneCardDto);
+    const output: MyApiResponse<ICard> = await controller.getOne(inputOneCardDto);
 
     expect(output.data.id).toBeDefined();
     expect(getOneSpy).toHaveBeenCalled();
@@ -79,7 +79,7 @@ describe('SecureCardController', () => {
 
     const createTransactionSpy = jest.spyOn(service, 'doTransaction').mockResolvedValue(icardMock);
 
-    const output: ApiResponse<ICard> = await controller.doTransaction(inputcardTransactionDto);
+    const output: MyApiResponse<ICard> = await controller.doTransaction(inputcardTransactionDto);
 
     expect(output.data.id).toBeDefined();
     expect(createTransactionSpy).toHaveBeenCalled();

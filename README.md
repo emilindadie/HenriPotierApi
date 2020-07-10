@@ -46,3 +46,57 @@ Dans cet exemple, la promotion la plus intéressante pour le client est la promo
 
 
 *Au-delà de « l’exercice imposé », toute idée originale supplémentaire sera appréciée.*
+
+
+# Configurations
+
+$ touch .env at root
+
+```sh
+echo "
+HOST=your_host
+DB_PORT=your_port
+USERNAME=your_database_username
+PASSWORD=your_database_password
+DATABASE=your_database_name
+JWTSECRET=your_secret
+SERVER_PORT=your_server_port
+ACCESS_TOKEN_EXPIREIN=your time (1h)
+" > .env
+```
+
+# Run api
+```sh
+$ npm run start
+```
+
+# Run api in debug mode
+```sh
+$ npm run start:debug
+```
+
+# Run tests
+```sh
+$ npm run test  
+```
+
+# e2e tests
+```sh
+$ npm run test:e2e 
+```
+
+# cucumber tests
+```sh
+$ npm run cucumber
+```
+
+# Run tests with coverage
+```sh
+$ npm run test:cov 
+```
+
+# Access to swagger interface
+
+```sh
+http://localhost:${your_server_port}/henripotier/api/swagger-ui
+```

@@ -61,7 +61,7 @@ describe('CardService', () => {
     const findOneSpy = jest.spyOn(repository, 'findOne').mockResolvedValue(icardMock);
 
     const saveSpy = jest.spyOn(repository, 'save').mockResolvedValue(icardMock);
-    const output: ICard = await service.doTransaction(intputcardTransactionDto.id, intputcardTransactionDto.amount);
+    const output: ICard = await service.doTransaction(intputcardTransactionDto.cardId, intputcardTransactionDto.amount);
 
     expect(output.id).toBeDefined();
     expect(findOneSpy).toHaveBeenCalled();

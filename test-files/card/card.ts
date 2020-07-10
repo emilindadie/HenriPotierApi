@@ -8,7 +8,7 @@ cardDtoMock.cryptogramme = 679;
 
 
 export const cardTransactionDtoMock = new CardTransactionDto();
-cardTransactionDtoMock.id = 1;
+cardTransactionDtoMock.cardId = 1;
 cardTransactionDtoMock.amount = 600;
 
 export const icardMock: ICard = {
