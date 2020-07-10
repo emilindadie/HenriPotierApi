@@ -9,7 +9,7 @@ Feature: Card Catalog
 
     Examples:
       | cardNumber           | expiration     | cryptogramme  | solde |
-      | 498794867            | 1590962400000  | 899           | 6000  |
+      | 498794867            | 1685570400000  | 899           | 6000  |
 
   Scenario Outline: Get all Card by an user
     Given a Card of cardNumber <cardNumber> and of expiration <expiration> and of cryptogramme <cryptogramme> and of solde <solde>
@@ -17,9 +17,8 @@ Feature: Card Catalog
     Then all card is get
 
     Examples:
-      | cardNumber           | expiration     | cryptogramme  | solde |
-      | 899879486            | 1590962400000  | 899           | 8000  |
-
+    | cardNumber           | expiration     | cryptogramme  | solde |
+    | 498794867            | 1685570400000  | 899           | 6000  |
 
   Scenario Outline: Get one Card which can be used by an user
     Given a Card of cardNumber <cardNumber> and of expiration <expiration> and of cryptogramme <cryptogramme> and of solde <solde>
@@ -28,7 +27,7 @@ Feature: Card Catalog
 
     Examples:
     | cardNumber           | expiration     | cryptogramme  | solde |
-    | 899879486            | 1590962400000  | 899           | 8000  |
+    | 498794867            | 1685570400000  | 899           | 6000  |
 
 
   Scenario Outline: Do a transaction with one card
@@ -39,4 +38,4 @@ Feature: Card Catalog
 
     Examples:
     | cardNumber           | expiration     | cryptogramme  | solde | price |
-    | 899879486            | 1590962400000  | 899           | 8000  | 500   |
+    | 498794867            | 1685570400000  | 899           | 6000  | 500   |

@@ -4,17 +4,16 @@ import axios from 'axios';
 import { assert } from 'chai';
 import { threadLocals } from './context';
 import { ICard } from '../../../src/models/card';
-import { ApiResponse } from 'src/models/api-response/api-response.model';
+import { MyApiResponse } from 'src/models/api-response/api-response.model';
 
 @binding()
 export class StepDefsCardGetAll {
-
     @when('user want to get all card')
     public async userWantTogetAllCard()  {
         const service = axios.create({
             baseURL: 'http://localhost:3000',
         });
-        const response: AxiosResponse<ApiResponse<ICard[]>> = await service.get<ApiResponse<ICard[]>>('henripotier/api/cards');
+        const response: AxiosResponse<MyApiResponse<ICard[]>> = await service.get<MyApiResponse<ICard[]>>('henripotier/api/cards');
         threadLocals.set(typeof response, response);
     }
 

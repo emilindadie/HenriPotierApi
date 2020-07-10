@@ -26,7 +26,7 @@ export class StepDefsCardGetOne {
     }
 
     @then('user get his card')
-    public allCardIsGet() {
+    public oneCardIsGet() {
         let response: AxiosResponse<MyApiResponse<ISecureCard>> = null;
         response = threadLocals.get(typeof response);
         assert.equal(response.status, 200);
