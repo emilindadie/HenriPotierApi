@@ -65,6 +65,10 @@ ACCESS_TOKEN_EXPIREIN=your time (1h)
 " > .env
 ```
 
+# FrontEnd Dependance build in Angular
+[HenriPotierFrontAngular](https://github.com/emilindadie/HenriPotierFrontAngular)
+
+
 # Run api
 ```sh
 $ npm run start
