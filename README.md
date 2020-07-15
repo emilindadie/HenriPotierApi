@@ -48,6 +48,10 @@ Dans cet exemple, la promotion la plus intéressante pour le client est la promo
 *Au-delà de « l’exercice imposé », toute idée originale supplémentaire sera appréciée.*
 
 
+# FrontEnd Dependance build in Angular
+[HenriPotierFrontAngular](https://github.com/emilindadie/HenriPotierFrontAngular)
+
+
 # Configurations
 
 $ touch .env at root
@@ -64,10 +68,6 @@ SERVER_PORT=your_server_port
 ACCESS_TOKEN_EXPIREIN=your time (1h)
 " > .env
 ```
-
-# FrontEnd Dependance build in Angular
-[HenriPotierFrontAngular](https://github.com/emilindadie/HenriPotierFrontAngular)
-
 
 # Run api
 ```sh
