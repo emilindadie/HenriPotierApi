@@ -48,7 +48,7 @@ Dans cet exemple, la promotion la plus intéressante pour le client est la promo
 *Au-delà de « l’exercice imposé », toute idée originale supplémentaire sera appréciée.*
 
 
-# FrontEnd Dependance build in Angular
+# FrontEnd Dependance built in Angular
 [HenriPotierFrontAngular](https://github.com/emilindadie/HenriPotierFrontAngular)
 
 
