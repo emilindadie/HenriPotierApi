@@ -1,12 +1,27 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import 'dotenv/config';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SecureCardModule } from './modules/securecard/secure-card.module';
+import { SeederService } from './services/seeder.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+    const logger = app.get(Logger);
+    const seeder = app.get(SeederService);
+
+    seeder
+      .seed()
+      .then(() => {
+        logger.debug('Seeding complete!');
+      })
+      .catch(error => {
+        logger.error('Seeding failed!');
+        throw error;
+      })
+  
   const port = process.env.SERVER_PORT || 3000;
 
   const options = new DocumentBuilder()

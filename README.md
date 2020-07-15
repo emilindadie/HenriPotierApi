@@ -100,3 +100,10 @@ $ npm run test:cov
 ```sh
 http://localhost:${your_server_port}/henripotier/api/swagger-ui
 ```
+
+
+# Seed data
+
+```
+You can update seed.ts file in seed-files folder to create some data (cards) when running api or you can do request on routes.
+```

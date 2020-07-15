@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CardEntity } from '../entities';
 import { ICard, CardDto } from '../models';
+import { cardsSeed } from '../../seed-files/seed';
 
 @Injectable()
 export class CardService {
@@ -59,4 +60,25 @@ export class CardService {
         }
         return this.cardRepository.save(card);
     }
+
+     seedInit(): Array<Promise<CardDto>> {
+        return cardsSeed.map(async (cardDto: CardDto) => {
+            return await this.cardRepository
+                .findOne({ cardNumber: cardDto.cardNumber })
+                .then(async dbCard => {
+                if (dbCard) {
+                    return Promise.resolve(null);
+                }
+                const card = new CardEntity();
+                card.cardNumber = cardDto.cardNumber;
+                card.expiration = new Date(cardDto.expiration);
+                card.cryptogramme = cardDto.cryptogramme;
+                card.solde = cardDto.solde;
+                return Promise.resolve(
+                    await this.cardRepository.save(card),
+                );
+            })
+            .catch(error => Promise.reject(error));
+        });
+      }
 }

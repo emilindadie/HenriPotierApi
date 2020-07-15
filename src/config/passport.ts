@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         if (!card){
             throw new UnauthorizedException();
         }
-        if (card.expiration.getTime() < dateNow.getTime()){
+        if (new Date(card.expiration).getTime() < dateNow.getTime()){
             throw new HttpException('Card has expired', 400);
         }
         return card;
